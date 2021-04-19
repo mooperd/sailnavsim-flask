@@ -51,14 +51,21 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log In')
 
-class LoginForm(FlaskForm):
+
+class MyIPAddress(FlaskForm):
     """Send some information form."""
     name = StringField(
-        'Name',
+        'name',
         validators=[
             DataRequired(),
             Email(message='Enter a valid email.')
         ]
     )
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Log In')
+    ipaddress = StringField(
+        'IP',
+        validators=[
+            DataRequired(),
+            IPAddress(message='Enter a valid ip-address.')
+        ]
+    )
+    submit = SubmitField('Submit')
