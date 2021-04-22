@@ -21,11 +21,13 @@ def create_app():
 
     with app.app_context():
         from . import routes
+        from . import pages
         from . import auth
         from .assets import compile_static_assets
 
         # Register Blueprints
-        app.register_blueprint(routes.main_bp)
+        app.register_blueprint(routes.routes_bp)
+        app.register_blueprint(pages.pages_bp)
         app.register_blueprint(auth.auth_bp)
         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///meow.db"
         
@@ -34,7 +36,7 @@ def create_app():
         db.create_all()
 
         # Compile static assets
-        if app.config['FLASK_ENV'] == 'development':
-            compile_static_assets(app)
+        print("running compile_static_assets")
+        compile_static_assets(app)
 
         return app

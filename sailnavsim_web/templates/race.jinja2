@@ -1,0 +1,59 @@
+{% extends "layout.jinja2" %}
+
+{% block pagestyles %}
+  <link href="{{ url_for('static', filename='dist/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.typekit.net/sus7rlu.css">
+{% endblock %}
+
+{% block content %}
+  <h1>{{ body }}</h1>
+
+  {% if current_user.is_authenticated %}
+    <p>Hi {{ current_user.name }}!</p>
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>{{race.name}}</td>
+        </tr>
+        <tr>
+          <td>Boat Type</td>
+          <td>{{race.boat_type}}</td>
+        </tr>
+        <tr>
+          <td>Start Time</td>
+          <td>{{race.start_time}}</td>
+        </tr>
+        <tr>
+          <td>Latitude</td>
+          <td>{{race.latitude}}</td>
+        </tr>
+        <tr>
+          <td>Longitude</td>
+          <td>{{race.longitude}}</td>
+        </tr>
+        <tr>
+          <td>SW Corner</td>
+          <td>{{race.sw_corner}}</td>
+        </tr>
+        <tr>
+          <td>NE Corner</td>
+          <td>{{race.ne_corner}}</td>
+        </tr>
+        <tr>
+          <td>Start Time</td>
+          <td>{{race.start_time}}</td>
+        </tr>
+        <tr>
+          <td>Private</td>
+          <td>{{race.private}}</td>
+        </tr>
+        <tr>
+          <td>ID</td>
+          <td>{{race.id}}</td>
+        </tr>
+      </table>
+    <a href="{{ url_for('pages_bp.logout') }}">Log out</a>
+  {% endif %}
+
+{% endblock %}
