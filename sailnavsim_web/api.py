@@ -5,8 +5,8 @@ from .forms import NewRaceForm, TestForm
 from .models import User, BoatRace, db
 
 # Blueprint Configuration
-routes_bp = Blueprint(
-    'routes_bp', __name__,
+api_bp = Blueprint(
+    'api_bp', __name__,
     template_folder='templates',
     static_folder='static',
     url_prefix='/api'
@@ -34,7 +34,7 @@ def create_race(new_race_dict, current_user):
         return f"Race name {new_race_dict['name']} already taken"
 
 
-@routes_bp.route('/race', methods=['GET', 'POST'])
+@api_bp.route('/race', methods=['GET', 'POST'])
 @login_required
 def race():
     """
@@ -65,8 +65,7 @@ def race():
                     )
                     
             
-
-@routes_bp.route('/test', methods=['GET', 'POST'])
+@api_bp.route('/test', methods=['GET', 'POST'])
 @login_required
 def test():
     """
@@ -84,7 +83,7 @@ def test():
     )
 
 
-@routes_bp.route("/logout")
+@api_bp.route("/logout")
 @login_required
 def logout():
     """User log-out logic."""

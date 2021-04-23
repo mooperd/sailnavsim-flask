@@ -20,7 +20,7 @@
 
     <h1>{{ body }}</h1>
 
-    <form method="POST" action="{{ url_for('routes_bp.race') }}">
+    <form method="POST" action="{{ url_for('api_bp.race') }}">
       {{ form.csrf_token }}
 
       <fieldset class="name">

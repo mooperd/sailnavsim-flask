@@ -28,20 +28,26 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.name)
 
+class BoatType(db.Model):
+    __tablename__   = 'BoatType'
+    id              = db.Column(db.Integer, primary_key=True, unique=True)
+    name            = db.Column(db.Text, nullable=False, unique=True)
+
 
 class Boat(db.Model):
     __tablename__   = 'Boat'
-    id              = db.Column(db.Integer, primary_key=True)
+    id              = db.Column(db.Integer, primary_key=True, unique=True)
     name            = db.Column(db.Text, nullable=False, unique=True)
     race            = db.Column(db.Text, nullable=False)
     desiredCourse   = db.Column(db.Float, nullable=False)
     started         = db.Column(db.Integer, nullable=False)
-    boatType        = db.Column(db.Integer, nullable=False)
     isActive        = db.Column(db.Integer, nullable=False)
     boatFlags       = db.Column(db.Integer, nullable=False)
-    race            = db.relation("BoatRace", backref="Boat")
-    race_id         = db.Column(db.Integer, db.ForeignKey('BoatRace.id'))
-    user            = db.relation("User", backref="User")
+    boatType        = db.relation("BoatType")
+    boatType_id     = db.Column(db.Integer, db.ForeignKey('BoatType.id'))
+    BoatRace        = db.relation("BoatRace")
+    BoatRace_id     = db.Column(db.Integer, db.ForeignKey('BoatRace.id'))
+    user            = db.relation("User")
     user_id         = db.Column(db.Integer, db.ForeignKey('Users.id'))
 
 
@@ -56,6 +62,8 @@ class BoatRace(db.Model):
     boat_type       = db.Column(db.Integer, nullable=False)
     start_time      = db.Column(db.Integer, nullable=False)
     private         = db.Column(db.Integer, nullable=False)
+    user            = db.relation("User")
+    user_id         = db.Column(db.Integer, db.ForeignKey('Users.id'))
 
 
 class BoatLog(db.Model):
@@ -92,19 +100,9 @@ class BoatLog(db.Model):
     waveHeight      = db.Column(db.Float)
     compassMagDec   = db.Column(db.Float, nullable=False)
     invisibleLog    = db.Column(db.Integer, nullable=False)
-    boat            = db.relation("Boat", backref="Boat")
+    boat            = db.relation("Boat")
     boat_id         = db.Column(db.Integer, db.ForeignKey('Boat.id'))
 
     __mapper_args__ = {
         "primary_key": [boat_id, time]
     }
-
-
-class MyIP(db.Model):
-    """Some IP Addresses"""
-    __tablename__   = 'ip_addresses'
-    id              = db.Column(db.Integer, primary_key=True)
-    name            = db.Column(db.String, nullable=False)
-    ip              = db.Column(db.String, nullable=False)
-    user            = db.relation("User", backref="Users")
-    user_id         = db.Column(db.Integer, db.ForeignKey('Users.id'))

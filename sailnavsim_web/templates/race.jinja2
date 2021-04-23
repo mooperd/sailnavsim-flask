@@ -13,46 +13,29 @@
     <p>Hi {{ current_user.name }}!</p>
       <table>
         <tr>
-          <td>Name</td>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Start Time</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>SW Corner</th>
+          <th>NE Corner</th>
+          <th>Private</th>
+          <th>ID</th>
+        </tr>
+        <tr>
           <td>{{race.name}}</td>
-        </tr>
-        <tr>
-          <td>Boat Type</td>
-          <td>{{race.boat_type}}</td>
-        </tr>
-        <tr>
-          <td>Start Time</td>
+          <td>{{race.boat_type.name}}</td>
           <td>{{race.start_time}}</td>
-        </tr>
-        <tr>
-          <td>Latitude</td>
           <td>{{race.latitude}}</td>
-        </tr>
-        <tr>
-          <td>Longitude</td>
           <td>{{race.longitude}}</td>
-        </tr>
-        <tr>
-          <td>SW Corner</td>
           <td>{{race.sw_corner}}</td>
-        </tr>
-        <tr>
-          <td>NE Corner</td>
           <td>{{race.ne_corner}}</td>
-        </tr>
-        <tr>
-          <td>Start Time</td>
-          <td>{{race.start_time}}</td>
-        </tr>
-        <tr>
-          <td>Private</td>
           <td>{{race.private}}</td>
-        </tr>
-        <tr>
-          <td>ID</td>
           <td>{{race.id}}</td>
         </tr>
       </table>
+
     <a href="{{ url_for('pages_bp.logout') }}">Log out</a>
   {% endif %}
 

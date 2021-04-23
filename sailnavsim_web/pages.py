@@ -2,7 +2,7 @@
 from flask import Blueprint, redirect, render_template, url_for, request
 from flask_login import current_user, login_required, logout_user
 from .forms import NewRaceForm, TestForm
-from .models import User, BoatRace, Boat, db
+from .models import User, BoatRace, BoatType, db
 
 # Blueprint Configuration
 pages_bp = Blueprint(
@@ -46,7 +46,8 @@ def races():
         current_user=current_user,
         body="You are now logged in!",
         races=db.session.query(BoatRace).all(),
-        form=form
+        form=form,
+        # choices=[(b.id, b.name) for b in BoatType.query.order_by('name').all()]
     )
 
 
